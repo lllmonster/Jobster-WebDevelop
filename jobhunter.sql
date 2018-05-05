@@ -10,24 +10,35 @@ INSERT INTO `Student` VALUES ('S003', 'Elise Diane Welsh','edw003');
 INSERT INTO `Student` VALUES ('S004', 'Mary Biomajor','mb004');
 INSERT INTO `Student` VALUES ('S005', 'Jake Mcclean','jm005');
 INSERT INTO `Student` VALUES ('S006', 'Carly Finance','cf006');
--- INSERT INTO `Student` VALUES('S007','Da Guai Liu','dgl007');
+INSERT INTO `Student` VALUES('S007','Da Guai Liu','dgl007');
 
 CREATE TABLE `StudentInfo` (
   `sid` VARCHAR(5) NOT NULL,
   `suniversity` VARCHAR(45) NOT NULL,
+  `sdegree` VARCHAR(45) NOT NULL,
+  `smajor` VARCHAR(45) NOT NULL,
   `sgpa` DECIMAL(2,1) NOT NULL,
   `sinfo` VARCHAR(255) NOT NULL,
+  `srestriction` ENUM('Y', 'N') NOT NULL,
   `sresumeaddr` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`sid`,`sresumeaddr`),
   FOREIGN KEY (`sid`) REFERENCES `Student` (`sid`));
 
-INSERT INTO `StudentInfo` VALUES ('S001', 'Colorado State University', 3.6,'Retail Management','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_sally.pdf');
-INSERT INTO `StudentInfo` VALUES ('S002', 'University of Arkansas', 3.4,'Early Childhood Development','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_john.pdf');
-INSERT INTO `StudentInfo` VALUES ('S003', 'American University', 3.6,'International Relations','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_elise.pdf');
-INSERT INTO `StudentInfo` VALUES ('S004', 'American University', 3.8,'Biology','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_mary.pdf');
-INSERT INTO `StudentInfo` VALUES ('S005', 'New York University', 3.9,'Law','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_jake.pdf');
-INSERT INTO `StudentInfo` VALUES ('S006', 'Columbia University',3.7,'Finance','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_carly.pdf');
-INSERT INTO `StudentInfo` VALUES ('S007', 'New York University',3.7,'Engineering','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_daguai.pdf');
+INSERT INTO `StudentInfo` VALUES 
+('S001', 'Colorado State University', 'MA','Speech Communication',3.6,'Retail Management','N', 'C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_sally.pdf');
+INSERT INTO `StudentInfo` VALUES 
+('S002', 'University of Arkansas', 'BS','Early Childhood Development',3.4,'care of
+special needs children and adults','N','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_john.pdf');
+INSERT INTO `StudentInfo` VALUES 
+('S003', 'American University', 'MA','International Relations',3.6,'Social Study and Education','N','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_elise.pdf');
+INSERT INTO `StudentInfo` VALUES 
+('S004', 'American University', 'BS','Biology',3.8,'Biology research and social programming','N','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_mary.pdf');
+INSERT INTO `StudentInfo` VALUES 
+('S005', 'New York University', 'JD','Law',3.9,'Legal Assistant and Legislative Assistant','Y','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_jake.pdf');
+INSERT INTO `StudentInfo` VALUES 
+('S006', 'Columbia University','MBA','Finance',3.7,'Finance MBA Development Program','Y','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_carly.pdf');
+INSERT INTO `StudentInfo` VALUES 
+('S007', 'New York University','MS','Engineering',3.7,'Database System and computer vision','Y','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_daguai.pdf');
 
 -- INSERT INTO `StudentInfo` VALUES ('S001', 'Colorado State University', 3.6,'Retail Management','https://www.id.uscourts.gov/Content_Fetcher/index.cfml/Sample_Chronological_Resume_132.pdf?Content_ID=132');
 -- INSERT INTO `StudentInfo` VALUES ('S002', 'University of Arkansas', 3.4,'Early Childhood Development','https://writing.colostate.edu/guides/documents/resume/functionalSample.pdf');
@@ -42,6 +53,41 @@ CREATE TABLE `ResumeInfo`(
   `resumecontent` BLOB NOT NULL,
   PRIMARY KEY (`sid`,`sresumeaddr`),
   FOREIGN KEY (`sid`,`sresumeaddr`) REFERENCES `StudentInfo` (`sid`,`sresumeaddr`));
+
+CREATE TABLE `Friends` (
+  `sid` VARCHAR(5) NOT NULL,
+  `fid` VARCHAR(5) NOT NULL,
+  PRIMARY KEY (`sid`, `fid`),
+  FOREIGN KEY (`sid`) REFERENCES `Student` (`sid`),
+  FOREIGN KEY (`fid`) REFERENCES `Student` (`sid`));
+
+INSERT INTO `Friends` VALUES ('S001','S002');INSERT INTO `Friends` VALUES ('S002','S001');
+INSERT INTO `Friends` VALUES ('S001','S003');INSERT INTO `Friends` VALUES ('S003','S001');
+INSERT INTO `Friends` VALUES ('S005','S007');INSERT INTO `Friends` VALUES ('S007','S005');
+
+CREATE TABLE `FriendRequest` (
+  `sid` VARCHAR(5) NOT NULL,
+  `rid` VARCHAR(5) NOT NULL,
+  `requesttime` DATETIME NOT NULL,
+  `frstatus` ENUM('Pending', 'Agreed','Rejected') NOT NULL,
+  PRIMARY KEY (`sid`, `rid`,`requesttime`),
+  FOREIGN KEY (`sid`) REFERENCES `Student` (`sid`),
+  FOREIGN KEY (`rid`) REFERENCES `Student` (`sid`));
+
+INSERT INTO `FriendRequest` VALUES ('S001', 'S004', '2017-11-15','Pending');
+INSERT INTO `FriendRequest` VALUES ('S001', 'S005', '2018-04-17','Rejected');
+
+CREATE TABLE `FriendMessage` (
+  `sid` VARCHAR(5) NOT NULL,
+  `fid` VARCHAR(5) NOT NULL,
+  `mdate` DATETIME NOT NULL,
+  `message` BLOB NOT NULL,
+  PRIMARY KEY (`sid`, `fid`,`mdate`),
+  FOREIGN KEY (`sid`,`fid`) REFERENCES `Friends` (`sid`,`fid`));
+
+INSERT INTO `FriendMessage` VALUES ('S001', 'S002', '2018-03-12 12:00:00','Hope you find job before you graduate!');
+INSERT INTO `FriendMessage` VALUES ('S002', 'S001', '2018-03-12 12:10:00','Thank you, you too.');
+INSERT INTO `FriendMessage` VALUES ('S001', 'S003', '2018-04-17 18:00:00','Hello nice to meet you');
 
 CREATE TABLE `CompanySign` (
   `cid` VARCHAR(5) NOT NULL,
@@ -94,16 +140,6 @@ INSERT INTO `JobInfo` VALUES ('J006', 'C03', 'Seattle','WA','Economist',150000,'
 INSERT INTO `JobInfo` VALUES ('J007', 'C03', 'Memphis','TN','HR Business Partner',60000,'BS','Any','2018-03-12','At Amazon, we are working to be the most customer-centric company on earth. To get there, we need exceptionally talented, bright, and driven people.');
 INSERT INTO `JobInfo` VALUES ('J008', 'C05', 'Draper','UT','Administrative Specialist',70000,'BS','Business','2017-08-19','The Business Processing Team that is part of our Energy Products Division is currently hiring for two positions: the Document Processing Specialist and the Document Generation Specialist.');
 INSERT INTO `JobInfo` VALUES ('J009', 'C05', 'Fremont','CA','Data and Analytics Engineer',150000,'MS','Computer Science','2018-04-14','The Data and Analytics Engineer will participate end to end on the Tesla Finance BI project; developing reports, dashboards, ETLs and database models that enables business decision makers mostly using Microsoft BI and database technologies.');
-
-CREATE TABLE `Friends` (
-  `sid` VARCHAR(5) NOT NULL,
-  `fid` VARCHAR(5) NOT NULL,
-  PRIMARY KEY (`sid`, `fid`),
-  FOREIGN KEY (`sid`) REFERENCES `Student` (`sid`),
-  FOREIGN KEY (`fid`) REFERENCES `Student` (`sid`));
-
-INSERT INTO `Friends` VALUES ('S001','S002');
-INSERT INTO `Friends` VALUES ('S001','S003');
 
 CREATE TABLE `Follow` (
   `sid` VARCHAR(5) NOT NULL,
