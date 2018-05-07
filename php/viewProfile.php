@@ -4,29 +4,46 @@ include 'connectDB.php';
 
 session_start();
 $sid = $_SESSION['sid'];
-echo "$sid";
+echo "Hello, "."$sid"."<br>";
 
 $conn = connectDB();
 $sql = "select * from StudentInfo where sid = '$sid'";
 $result = $conn->query($sql);
 
-
-
-// echo "<p><b>View Your Profile</b><br><br>";
-// echo "<table border='1' cellpadding='10'>";
-// //echo "<tr> <th>ID</th> <th>First Name</th> <th>Last Name</th> <th></th> <th></th></tr>";
-// echo "<tr> <th>Your Name</th></tr>";
-// echo "<tr> <th>Your University</th></tr>";
-// echo "<tr> <th>Your Degree</th></tr>";
-// echo "<tr> <th>Your Major</th></tr>";
-// echo "<tr> <th>Your GPA</th></tr>";
-// echo "<tr> <th>Your Name</th></tr>";
-// echo "<tr> <th>Your Name</th></tr>";
-
 if ($result->num_rows > 0 ) {
+	$row = $result->fetch_assoc();
+	$suniversity = $row['suniversity'];
+	$sdegree = $row['sdegree'];
+	$smajor = $row['smajor'];
+	$sgpa = $row['sgpa'];
+	$sinfo = $row['sinfo'];
+	$srestriction = $row['srestriction'];
+	$sresumeaddr = $row['sresumeaddr'];
 
+	$_SESSION['suniversity']   = $suniversity;
+	$_SESSION['sdegree']   = $sdegree;
+	$_SESSION['smajor']   = $smajor;
+	$_SESSION['sgpa']   = $sgpa;
+	$_SESSION['sinfo']   = $sinfo;
+	$_SESSION['srestriction']   = $srestriction;
+	$_SESSION['sresumeaddr']   = $sresumeaddr;
 } else {
 	echo "You need to create your profile";
+	$suniversity = " ";
+	$sdegree = " ";
+	$smajor = " ";
+	$sgpa = " ";
+	$sinfo = " ";
+	$srestriction = " ";
+	$sresumeaddr = " ";
+
+	$_SESSION['suniversity']   = $suniversity;
+	$_SESSION['sdegree']   = $sdegree;
+	$_SESSION['smajor']   = $smajor;
+	$_SESSION['sgpa']   = $sgpa;
+	$_SESSION['sinfo']   = $sinfo;
+	$_SESSION['srestriction']   = $srestriction;
+	$_SESSION['sresumeaddr']   = $sresumeaddr;
 }
 
 ?>
@@ -40,44 +57,22 @@ if ($result->num_rows > 0 ) {
 <body>
     <div class="studentprofile">
 		<h1>Student Profile</h1>
-		<h1><?php echo "$result"; ?></h1>
-	    <form method="post" action="php\sprofile.php">
-	    	<p id="suniversity">Your University
-	    	<input id="suniversity" required="required" type="text" />
+		<p>User Name: <?php echo $sid ?></p>
+		<form method="post" action="editProfile.php">
+			<ul>
+				<li>Your University: <?php echo $suniversity ?></li>
+				<li>Your Degree: <?php echo $sdegree ?></li>
+				<li>Your Major: <?php echo $smajor ?></li>
+				<li>Your GPA: <?php echo $sgpa ?></li>
+				<li>Your Information: <?php echo $sinfo ?></li>
+				<li>Your Restriction: <?php echo $srestriction ?></li>
+				<li>Your ResumeAddress: <?php echo $sresumeaddr ?></li>
+			</ul>
+			<input type="submit" value="Edit">
+			<p class="change_link">
+	    		<a href="mainPage.php" class="tosignup">Return to the main page</a>
 	    	</p>
-	    	<p id="sdegree">Your Degree
-	    	<input id="sdegree" required="required" type="text" />
-	    	</p>
-	    	<p id="smajor">Your Major
-	    	<input id="smajor" required="required" type="text" />
-	    	</p>
-	    	<p id="sgpa">Your GPA
-	    	<input id="sgpa" required="required" type="text" />
-	    	</p>
-	    	<p id="sinfo">Your Information</p>
-	    	<p>
-	    		<textarea id="sinfo" rows="5" cols="80"></textarea>
-	    		<!-- <input id="sinfo" required="required" type="text" /> -->
-	    	</p>
-
-	    	<p id="sgpa">Your Resume
-	    	<input id="sresume" type="file" />
-	    	</p>
-
-	    	<p id="srestriction">If your profile is only visible to your fiends and to companies you applied.
-	    	<select id="srestriction">
-	    		<option value="Y">Yes</option>
-	    		<option value="N">No</option>
-	    	</select>
-	    	</p>
-	    	<p class="save button">
-	    		<input type="submit" name="save" value="Save" />
-	    	</p>
-
-	    	
-
-
-	    </form>
+		</form>
 	</div>
 
 

@@ -1,7 +1,7 @@
 <?php 
 session_start();
 $sid = $_SESSION['sid'];
-echo "$sid";
+echo "Hello, "."$sid"."<br>";
 ?>
 
 <!DOCTYPE html>
@@ -13,25 +13,21 @@ echo "$sid";
 	<div class="MainPage">
 		<h1>Job Search</h1>
 
+		<?php $_SESSION['sid']   = $sid; ?>
 		<form method="post" action="viewProfile.php">
-			<?php $_SESSION['sid']   = $sid; ?>
 			<input type="submit" value="View Your Profile">
 		</form>
 
-<!-- 		<form method="post" action="ssign.php">
+		<form method="post" action="viewFriends.php">
+			<input type="submit" value="View Your Friends">
+		</form>
 
-	    	<p class="jobsearch">Job Search 
+	    	<!-- <p class="jobsearch">Job Search 
 	    		<input class="jobsearch" type="text" />
-	    	</p>
-
-	    	<p class="friendsearch">Friend Search 
-	    		<input class="friendsearch" type="text" />
-	    	</p>
-
-	    	<p class = change_link>
-	    		<a href="studentLogin.html" class="tologin">Sign out</a>
-	    	</p>
-		</form> -->
+	    	</p> -->
+    	<p class = change_link>
+    		<a href="..\studentLogin.html" class="tologin">Sign out</a>
+    	</p>
 	</div>
 </body>
 </html>
