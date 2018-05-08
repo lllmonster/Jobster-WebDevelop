@@ -41,6 +41,8 @@ $frtFrom = $row_trigger['freqFrom'];
 			<input type="submit" value="Search Friends">
 			</p>
 		</form>
+
+
 		<form method="post" action="friendNotifications.php">
 			<input type="submit" value="Friend Notifications">
 			<?php  
@@ -49,6 +51,21 @@ $frtFrom = $row_trigger['freqFrom'];
 			?>
 		</form>
 
+		<form method="post" action="jobSearch.php">
+			<p>Search Job
+				<input id="jobsname" name="jobname" required="required" type="text" placeholder="Job&nbsp;keyword">
+			<input type="submit" value="Search Job">
+			</p>
+		</form>
+		<form method="post" action="jobNotifications.php">
+			<input type="submit" value="Job Notifications">
+		</form>
+		<form method="post" action="companySearch.php">
+			<p>Search Company
+				<input id="companyname" name="companyname" required="required" type="text" placeholder="Company&nbsp;Name">
+			<input type="submit" value="Search Company">
+			</p>
+		</form>
 	    	<!-- <p class="jobsearch">Job Search 
 	    		<input class="jobsearch" type="text" />
 	    	</p> -->
