@@ -1,10 +1,16 @@
 <?php
 include 'connectDB.php';
+session_start();
+if (isset($_SESSION['sid']) && isset($_SESSION['fid']) ) {
+    $sid = $_SESSION['sid'];
+    $fid = $_SESSION['fid'];
+}
+if (isset($_POST['sid']) && isset($_POST['fid']) ) {
+    $sid = $_POST['sid'];
+    $fid = $_POST['fid'];
+}
 
-$sid = $_POST['sid'];
-$fid = $_POST['fid'];
-
-echo "Hello, ".$sid;
+echo "Hello, ".$sid." AND ".$fid;
 $finalSid = $sid;
 $finalFid = $fid;
 
@@ -34,7 +40,6 @@ if ($result->num_rows > 0) { // output data of each row
 
     $_SESSION['sid'] = $finalSid;
     $_SESSION['fid'] = $finalFid;
-    echo "<input type='hidden' name = 'mdate' value='$currdate'>";
 	echo "<p><input type='submit' value='Send'>";
 	echo "</form>";
 } else {

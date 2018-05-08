@@ -66,7 +66,7 @@ if ($result->num_rows > 0 ) {
 				<li>Your GPA: <?php echo $sgpa ?></li>
 				<li>Your Information: <?php echo $sinfo ?></li>
 				<li>Your Restriction: <?php echo $srestriction ?></li>
-				<li>Your ResumeAddress: <?php echo $sresumeaddr ?></li>
+				<li>Your Resume: <a href="<?php echo($sresumeaddr) ?>">Your Resume</a></li>
 			</ul>
 			<input type="submit" value="Edit">
 			<p class="change_link">

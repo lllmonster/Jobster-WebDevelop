@@ -1,7 +1,16 @@
 <?php 
+include 'connectDB.php';
+include 'friendTrigger.php';
 session_start();
 $sid = $_SESSION['sid'];
 echo "Hello, "."$sid"."<br>";
+
+$conn = connectDB();
+$row_trigger = friendTrigger($conn,$sid);
+$fmt = $row_trigger['fmesTrigger'];
+$fmtFrom = $row_trigger['fmesFrom'];
+$frt = $row_trigger['freqTrigger'];
+$frtFrom = $row_trigger['freqFrom'];
 ?>
 
 <!DOCTYPE html>
@@ -19,14 +28,32 @@ echo "Hello, "."$sid"."<br>";
 		</form>
 
 		<form method="post" action="viewFriends.php">
-			<input type="submit" value="View Your Friends">
+			<input type="submit" value="Talk To Your Friends">
+			<?php  
+				if($fmt == True){ echo "You have a new message:)";}
+				$_SESSION['newMessageFrom'] = $fmtFrom;
+			?>
+		</form>
+
+		<form method="post" action="friendSearch.php">
+			<p>Search Friends
+				<input id="friendsname" name="friendsname" required="required" type="text" placeholder="friends&nbsp;username">
+			<input type="submit" value="Search Friends">
+			</p>
+		</form>
+		<form method="post" action="friendNotifications.php">
+			<input type="submit" value="Friend Notifications">
+			<?php  
+				if($frt == True){ echo "You have a new Request:)";}
+				$_SESSION['newRequestFrom'] = $frtFrom;
+			?>
 		</form>
 
 	    	<!-- <p class="jobsearch">Job Search 
 	    		<input class="jobsearch" type="text" />
 	    	</p> -->
     	<p class = change_link>
-    		<a href="..\studentLogin.html" class="tologin">Sign out</a>
+    		<a href="studentLogin.php" class="tologin">Sign out</a>
     	</p>
 	</div>
 </body>

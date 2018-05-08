@@ -57,6 +57,9 @@ $conn = connectDB();
 	    	<p class="save button">
 	    		<input type="submit" name="save" value="Save" />
 	    	</p>
+	    	<p>
+	    		<a href='viewProfile.php'>Don't save, return to the Profile directly</a>
+	    	</p>
 	    </form>
 	</div>
 </body>

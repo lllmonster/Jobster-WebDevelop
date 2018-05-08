@@ -25,20 +25,20 @@ CREATE TABLE `StudentInfo` (
   FOREIGN KEY (`sid`) REFERENCES `Student` (`sid`));
 
 INSERT INTO `StudentInfo` VALUES 
-('S001', 'Colorado State University', 'MA','Speech Communication',3.6,'Retail Management','N', 'C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_sally.pdf');
+('S001', 'Colorado State University', 'MA','Speech Communication',3.6,'Retail Management','N', '../cv/cv_sally.pdf');
 INSERT INTO `StudentInfo` VALUES 
 ('S002', 'University of Arkansas', 'BS','Early Childhood Development',3.4,'care of
-special needs children and adults','N','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_john.pdf');
+special needs children and adults','N','../cv/cv_john.pdf');
 INSERT INTO `StudentInfo` VALUES 
-('S003', 'American University', 'MA','International Relations',3.6,'Social Study and Education','N','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_elise.pdf');
+('S003', 'American University', 'MA','International Relations',3.6,'Social Study and Education','N','../cv/cv_elise.pdf');
 INSERT INTO `StudentInfo` VALUES 
-('S004', 'American University', 'BS','Biology',3.8,'Biology research and social programming','N','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_mary.pdf');
+('S004', 'American University', 'BS','Biology',3.8,'Biology research and social programming','N','../cv/cv_mary.pdf');
 INSERT INTO `StudentInfo` VALUES 
-('S005', 'New York University', 'JD','Law',3.9,'Legal Assistant and Legislative Assistant','Y','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_jake.pdf');
+('S005', 'New York University', 'JD','Law',3.9,'Legal Assistant and Legislative Assistant','Y','../cv/cv_jake.pdf');
 INSERT INTO `StudentInfo` VALUES 
-('S006', 'Columbia University','MBA','Finance',3.7,'Finance MBA Development Program','Y','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_carly.pdf');
+('S006', 'Columbia University','MBA','Finance',3.7,'Finance MBA Development Program','Y','../cv/cv_carly.pdf');
 INSERT INTO `StudentInfo` VALUES 
-('S007', 'New York University','MS','Engineering',3.7,'Database System and computer vision','Y','C:/Users/Yutong Liu/OneDrive/nyu/database/Project/cv_daguai.pdf');
+('S007', 'New York University','MS','Engineering',3.7,'Database System and computer vision','Y','../cv/cv_daguai.pdf');
 
 -- INSERT INTO `StudentInfo` VALUES ('S001', 'Colorado State University', 3.6,'Retail Management','https://www.id.uscourts.gov/Content_Fetcher/index.cfml/Sample_Chronological_Resume_132.pdf?Content_ID=132');
 -- INSERT INTO `StudentInfo` VALUES ('S002', 'University of Arkansas', 3.4,'Early Childhood Development','https://writing.colostate.edu/guides/documents/resume/functionalSample.pdf');
@@ -76,6 +76,8 @@ CREATE TABLE `FriendRequest` (
 
 INSERT INTO `FriendRequest` VALUES ('S001', 'S004', '2017-11-15','Pending');
 INSERT INTO `FriendRequest` VALUES ('S001', 'S005', '2018-04-17','Rejected');
+INSERT INTO `FriendRequest` VALUES ('S005', 'S001', '2018-01-01','Pending');
+INSERT INTO `FriendRequest` VALUES ('S007', 'S001', '2018-04-20','Pending');
 
 CREATE TABLE `FriendMessage` (
   `sid` VARCHAR(5) NOT NULL,
@@ -88,6 +90,15 @@ CREATE TABLE `FriendMessage` (
 INSERT INTO `FriendMessage` VALUES ('S001', 'S002', '2018-03-12 12:00:00','Hope you find job before you graduate!');
 INSERT INTO `FriendMessage` VALUES ('S002', 'S001', '2018-03-12 12:10:00','Thank you, you too.');
 INSERT INTO `FriendMessage` VALUES ('S001', 'S003', '2018-04-17 18:00:00','Hello nice to meet you');
+
+CREATE TABLE `FriendTrigger` (
+  `sid` VARCHAR(5) NOT NULL,
+  `fmesTrigger` BOOLEAN NOT NULL,
+  `fmesFrom` VARCHAR(5),
+  `freqTrigger` BOOLEAN NOT NULL,
+  `freqFrom` VARCHAR(5),
+  PRIMARY KEY (`sid`),
+  FOREIGN KEY (`sid`) REFERENCES `Student` (`sid`));
 
 CREATE TABLE `CompanySign` (
   `cid` VARCHAR(5) NOT NULL,

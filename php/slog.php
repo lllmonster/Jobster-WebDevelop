@@ -11,6 +11,8 @@ if($ifAvailable) {
 	$_SESSION['sid']   = $sid;
 	header("Location: mainPage.php");
 } else {
+	// $_SESSION['warning'] = "The username isn't exist or Password is wrong. Please Login again";
+	// header("Location: studentLogin.php");
 	echo "The username isn't exist or Password is wrong";
 	echo "<br>";
 	echo "Please Login again";
