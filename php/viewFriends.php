@@ -34,3 +34,14 @@ if ($result->num_rows > 0) { // output data of each row
 $conn->query("update friendTrigger set fmesTrigger=False,fmesFrom='' where sid='$sid'");
 echo "<br></br>"."<a href='mainPage.php' class='tosignup'>Return to the main page</a>";
  ?>
+
+ <!DOCTYPE html>
+ <html>
+ <head>
+     <title>Jobster</title>
+     <link rel="stylesheet" type="text/css" href="..\css\style.css">
+ </head>
+ <body>
+ 
+ </body>
+ </html>

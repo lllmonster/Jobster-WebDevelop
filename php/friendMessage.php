@@ -10,7 +10,7 @@ if (isset($_POST['sid']) && isset($_POST['fid']) ) {
     $fid = $_POST['fid'];
 }
 
-echo "Hello, ".$sid." AND ".$fid;
+echo "Hello, ".$sid." AND ".$fid."<br>";
 $finalSid = $sid;
 $finalFid = $fid;
 
@@ -26,7 +26,7 @@ if ($result->num_rows > 0) { // output data of each row
     	$fid = $row['fid'];
         $message = $row["message"];
         $mdate = $row['mdate'];
-		echo "<br> Time: ".$mdate."<br>";
+		echo "<br> ".$mdate."<br>";
 		echo "<br>".$sid." talk to ".$fid." : ".$message."<br>";
     }
 	echo "<br> New Message: <br>";
@@ -47,3 +47,13 @@ if ($result->num_rows > 0) { // output data of each row
 }
 
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Jobster</title>
+    <link rel="stylesheet" type="text/css" href="..\css\style.css">
+</head>
+<body class="profile">
+</body>
+</html>

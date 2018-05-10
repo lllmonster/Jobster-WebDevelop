@@ -102,15 +102,16 @@ CREATE TABLE `FriendTrigger` (
 
 CREATE TABLE `CompanySign` (
   `cid` VARCHAR(5) NOT NULL,
+  `cemail` VARCHAR (50) NOT NULL,
   `cpassword` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`cid`));
 
-INSERT INTO `CompanySign` VALUES ('C01','adobe');
-INSERT INTO `CompanySign` VALUES ('C02','apple');
-INSERT INTO `CompanySign` VALUES ('C03','amazon');
-INSERT INTO `CompanySign` VALUES ('C04','oracle');
-INSERT INTO `CompanySign` VALUES ('C05','tesla');
-INSERT INTO `CompanySign` VALUES ('C06','microsoft');
+INSERT INTO `CompanySign` VALUES ('C01','recruiter@adobe.com','adobe');
+INSERT INTO `CompanySign` VALUES ('C02','recruiter@apple.com','apple');
+INSERT INTO `CompanySign` VALUES ('C03','recruiter@amazon.com','amazon');
+INSERT INTO `CompanySign` VALUES ('C04','recruiter@oracle.com','oracle');
+INSERT INTO `CompanySign` VALUES ('C05','recruiter@telsa.com','tesla');
+INSERT INTO `CompanySign` VALUES ('C06','recruiter@microsoft.com','microsoft');
 
 CREATE TABLE `Company` (
   `cid` VARCHAR(5) NOT NULL,
@@ -128,11 +129,12 @@ INSERT INTO `Company` VALUES ('C04', 'Oracle', 'Redwood', 'CA', 'IT&Services');
 INSERT INTO `Company` VALUES ('C05', 'Tesla', 'Palo Alto', 'CA', 'Automotive');
 INSERT INTO `Company` VALUES ('C06', 'Microsoft', 'Redmond', 'WA', 'Consumer Electronics');
 
+
 CREATE TABLE `JobInfo` (
   `jid` VARCHAR(5) NOT NULL,
   `cid` VARCHAR(5) NOT NULL,
   `jcity` VARCHAR(20) NOT NULL,
-  `jstate` VARCHAR(5) NOT NULL,
+  `jstate` VARCHAR(40) NOT NULL,
   `jtitle` VARCHAR(45) NOT NULL,
   `jsalary` INTEGER(1) NOT NULL,
   `jdegree` VARCHAR(10) NOT NULL,
@@ -141,7 +143,7 @@ CREATE TABLE `JobInfo` (
   `jdesc` TEXT NOT NULL,
   PRIMARY KEY (`jid`),
   FOREIGN KEY (`cid`) REFERENCES `Company` (`cid`));
-
+-- 
 INSERT INTO `JobInfo` VALUES ('J001', 'C02', 'New York','NY','Manager',100000,'BS','Any','2018-04-14','As a Manager, you are responsible for inspiring your team to create ownership opportunities for customers on the sales floor.');
 INSERT INTO `JobInfo` VALUES ('J002', 'C02', 'Berkeley','CA','Software Engineer',150000,'MS','Computer Science','2017-04-14','You will work in a small team of backend service engineers to build new services from the ground-up, as well as integrate new features into Apple services such as iCloud.');
 INSERT INTO `JobInfo` VALUES ('J003', 'C02', 'Los Angeles','CA','Market Leader',100000,'BS','Marketing','2018-01-01','Create the vision for the market or country that aligns with the brand and purpose.');
@@ -152,49 +154,43 @@ INSERT INTO `JobInfo` VALUES ('J007', 'C03', 'Memphis','TN','HR Business Partner
 INSERT INTO `JobInfo` VALUES ('J008', 'C05', 'Draper','UT','Administrative Specialist',70000,'BS','Business','2017-08-19','The Business Processing Team that is part of our Energy Products Division is currently hiring for two positions: the Document Processing Specialist and the Document Generation Specialist.');
 INSERT INTO `JobInfo` VALUES ('J009', 'C05', 'Fremont','CA','Data and Analytics Engineer',150000,'MS','Computer Science','2018-04-14','The Data and Analytics Engineer will participate end to end on the Tesla Finance BI project; developing reports, dashboards, ETLs and database models that enables business decision makers mostly using Microsoft BI and database technologies.');
 
+ 
 CREATE TABLE `Follow` (
   `sid` VARCHAR(5) NOT NULL,
   `cid` VARCHAR(5) NOT NULL,
-  `followstatus` ENUM('Followed', 'Not Follow') NOT NULL,
-  PRIMARY KEY (`sid`, `cid`, `followstatus`),
+  PRIMARY KEY (`sid`, `cid`),
   FOREIGN KEY (`sid`) REFERENCES `Student` (`sid`),
   FOREIGN KEY (`cid`) REFERENCES `Company` (`cid`));
 
-INSERT INTO `Follow` VALUES ('S001', 'C01', 'Followed');
-INSERT INTO `Follow` VALUES ('S001', 'C02', 'Not Follow');
-INSERT INTO `Follow` VALUES ('S005', 'C06', 'Followed');
+INSERT INTO `Follow` VALUES ('S001', 'C01');
+INSERT INTO `Follow` VALUES ('S001', 'C02');
+INSERT INTO `Follow` VALUES ('S005', 'C06');
+
 
 CREATE TABLE `JobApply` (
   `sid` VARCHAR(5) NOT NULL,
   `jid` VARCHAR(5) NOT NULL,
-  `applystatus` ENUM('Applied', 'Not Apply') NOT NULL,
+  `cid` VARCHAR(5) NOT NULL,
   PRIMARY KEY (`sid`, `jid`),
   FOREIGN KEY (`sid`) REFERENCES `Student` (`sid`),
-  FOREIGN KEY (`jid`) REFERENCES `JobInfo` (`jid`));
+  FOREIGN KEY (`jid`) REFERENCES `JobInfo` (`jid`),
+  FOREIGN KEY (`cid`) REFERENCES `Company` (`cid`));
 
-INSERT INTO `JobApply` VALUES ('S001', 'J001', 'Applied');
-INSERT INTO `JobApply` VALUES ('S001', 'J002', 'Not Apply');
+INSERT INTO `JobApply` VALUES ('S001', 'J001', 'C02');
+INSERT INTO `JobApply` VALUES ('S001', 'J002', 'C02');
+
 
 CREATE TABLE `JobNotifications` (
   `sid` VARCHAR(5) NOT NULL,
   `jid` VARCHAR(5) NOT NULL,
   `cid` VARCHAR(5) NOT NULL,
-  PRIMARY KEY (`sid`, `jid`,`cid`),
+  `NotifyDate` DATETIME NOT NULL,
+  `ViewStstus` ENUM('Viewed','New') NOT NULL,
+  PRIMARY KEY (`sid`, `jid`),
   FOREIGN KEY (`sid`) REFERENCES `Student` (`sid`),
   FOREIGN KEY (`jid`) REFERENCES `JobInfo` (`jid`),
   FOREIGN KEY (`cid`) REFERENCES `Company` (`cid`));
 
-INSERT INTO `JobNotifications` VALUES ('S001', 'J001', 'C02');
-INSERT INTO `JobNotifications` VALUES ('S001', 'J002', 'C02');
-
-CREATE TABLE `FriendRequest` (
-  `sid` VARCHAR(5) NOT NULL,
-  `rid` VARCHAR(5) NOT NULL,
-  `requesttime` DATETIME NOT NULL,
-  `frstatus` ENUM('Ignored', 'Agreed','Rejected') NOT NULL,
-  PRIMARY KEY (`sid`, `rid`,`requesttime`),
-  FOREIGN KEY (`sid`) REFERENCES `Student` (`sid`),
-  FOREIGN KEY (`rid`) REFERENCES `Student` (`sid`));
-
-INSERT INTO `FriendRequest` VALUES ('S001', 'S004', '2017-11-15','Ignored');
-INSERT INTO `FriendRequest` VALUES ('S001', 'S005', '2018-04-17','Rejected');
+INSERT INTO `JobNotifications` VALUES ('S001', 'J001', 'C02', '2018-04-14 00:00:00', 'Viewed');
+INSERT INTO `JobNotifications` VALUES ('S001', 'J002', 'C02', '2018-04-05 00:00:00', 'New');
+INSERT INTO `JobNotifications` VALUES ('S001', 'J003', 'C02', '2018-01-01 00:00:00', 'New');

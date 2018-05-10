@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Student Login</title>
-	<link rel="stylesheet" type="text/css" href="..\css\styleLogSign.css">
+	<title>Jobster</title>
+	<link rel="stylesheet" type="text/css" href="..\css\style.css">
+	<!-- <link rel="stylesheet" type="text/css" href="../css/styleLogSign.css"> -->
 </head>
 <body>
-    <div class="studentlogin">
+    <div class="container">
 		<h1>Student Login</h1>
 	    <form method="post" action="slog.php">
 	    	<p>Your username
@@ -14,14 +15,15 @@
 	    	<p>Your password
 	    		<input id="password" name="password" required="required" type="password" placeholder="ll123" />
 	    	</p>
-	    	<p class="login button">
-	    		<input type="submit" name="login" value="Login" />
+	    	<p>
+	    		<input class="logbutton" type="submit" name="login" value="Login" />
 	    	</p>
 	    	<p class="change_link">Not a member yet ?
 	    		<a href="studentSignup.php" class="tosignup">Join us</a>
 	    	</p>
 	    </form>
 	</div>
+
 
 </body>
 </html>

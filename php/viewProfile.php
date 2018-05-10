@@ -4,7 +4,7 @@ include 'connectDB.php';
 
 session_start();
 $sid = $_SESSION['sid'];
-echo "Hello, "."$sid"."<br>";
+
 
 $conn = connectDB();
 $sql = "select * from StudentInfo where sid = '$sid'";
@@ -52,21 +52,21 @@ if ($result->num_rows > 0 ) {
 <html>
 <head>
 	<title>Student Profile</title>
-	<!-- <link rel="stylesheet" type="text/css" href="css\styleLogSign.css"> -->
+	<link rel="stylesheet" type="text/css" href="..\css\style.css">
 </head>
 <body>
-    <div class="studentprofile">
-		<h1>Student Profile</h1>
+    <div class="profile">
+		<h1>Your Profile</h1>
 		<p>User Name: <?php echo $sid ?></p>
 		<form method="post" action="editProfile.php">
 			<ul>
-				<li>Your University: <?php echo $suniversity ?></li>
-				<li>Your Degree: <?php echo $sdegree ?></li>
-				<li>Your Major: <?php echo $smajor ?></li>
-				<li>Your GPA: <?php echo $sgpa ?></li>
-				<li>Your Information: <?php echo $sinfo ?></li>
-				<li>Your Restriction: <?php echo $srestriction ?></li>
-				<li>Your Resume: <a href="<?php echo($sresumeaddr) ?>">Your Resume</a></li>
+				<li>Your University: <?php echo $suniversity ?></li><br>
+				<li>Your Degree: <?php echo $sdegree ?></li><br>
+				<li>Your Major: <?php echo $smajor ?></li><br>
+				<li>Your GPA: <?php echo $sgpa ?></li><br>
+				<li>Your Information: <?php echo $sinfo ?></li><br>
+				<li>Your Restriction: <?php echo $srestriction ?></li><br>
+				<li>Your Resume: <a href="<?php echo($sresumeaddr) ?>">Your Resume</a></li><br>
 			</ul>
 			<input type="submit" value="Edit">
 			<p class="change_link">

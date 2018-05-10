@@ -3,7 +3,6 @@ include 'connectDB.php';
 include 'friendTrigger.php';
 session_start();
 $sid = $_SESSION['sid'];
-echo "Hello, "."$sid"."<br>";
 
 $conn = connectDB();
 $row_trigger = friendTrigger($conn,$sid);
@@ -17,53 +16,57 @@ $frtFrom = $row_trigger['freqFrom'];
 <html>
 <head>
 	<title>Jobster</title>
+	<link rel="stylesheet" type="text/css" href="..\css\style.css">
 </head>
 <body>
-	<div class="MainPage">
-		<h1>Job Search</h1>
+	<div class="mainpage">
+		<h1>Welcome to Jobster, <?php echo "$sid"."<br>"; ?></h1>
 
 		<?php $_SESSION['sid']   = $sid; ?>
-		<form method="post" action="viewProfile.php">
+		<form class="view1" method="post" action="viewProfile.php">
 			<input type="submit" value="View Your Profile">
 		</form>
 
-		<form method="post" action="viewFriends.php">
+		<form class="view2" method="post" action="viewFriends.php">
 			<input type="submit" value="Talk To Your Friends">
 			<?php  
 				if($fmt == True){ echo "You have a new message:)";}
 				$_SESSION['newMessageFrom'] = $fmtFrom;
 			?>
 		</form>
-
-		<form method="post" action="friendSearch.php">
-			<p>Search Friends
-				<input id="friendsname" name="friendsname" required="required" type="text" placeholder="friends&nbsp;username">
-			<input type="submit" value="Search Friends">
-			</p>
-		</form>
-
-
-		<form method="post" action="friendNotifications.php">
+		<br></br>
+		<form class="notify" method="post" action="friendNotifications.php">
 			<input type="submit" value="Friend Notifications">
 			<?php  
 				if($frt == True){ echo "You have a new Request:)";}
 				$_SESSION['newRequestFrom'] = $frtFrom;
 			?>
 		</form>
+		<br>
 
-		<form method="post" action="jobSearch.php">
-			<p>Search Job
-				<input id="jobsname" name="jobname" required="required" type="text" placeholder="Job&nbsp;keyword">
-			<input type="submit" value="Search Job">
-			</p>
-		</form>
-		<form method="post" action="jobNotifications.php">
+		<form class="notify" method="post" action="jobNotifications.php">
 			<input type="submit" value="Job Notifications">
 		</form>
-		<form method="post" action="companySearch.php">
+		<br></br>
+
+		<form class="search" method="post" action="companySearch.php">
 			<p>Search Company
-				<input id="companyname" name="companyname" required="required" type="text" placeholder="Company&nbsp;Name">
+				<input id="companyname" name="companyname" required="required" type="text" >
 			<input type="submit" value="Search Company">
+			</p>
+		</form>
+
+		<form class="search" method="post" action="friendSearch.php">
+			<p>Search Friends&nbsp;&nbsp;
+				<input id="friendsname" name="friendsname" required="required" type="text">
+			<input type="submit" value="Search Friends">
+			</p>
+		</form>
+
+		<form class="search" method="post" action="jobSearch.php">
+			<p>Search Job&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<input id="jobsname" name="jobname" required="required" type="text" >
+			<input type="submit" value="Search Job">
 			</p>
 		</form>
 	    	<!-- <p class="jobsearch">Job Search 
