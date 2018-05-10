@@ -10,18 +10,20 @@ $fmt = $row_trigger['fmesTrigger'];
 $fmtFrom = $row_trigger['fmesFrom'];
 $frt = $row_trigger['freqTrigger'];
 $frtFrom = $row_trigger['freqFrom'];
+// echo $fmt;
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Jobster</title>
-	<link rel="stylesheet" type="text/css" href="..\css\style.css">
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
 	<div class="mainpage">
-		<h1>Welcome to Jobster, <?php echo "$sid"."<br>"; ?></h1>
-
+		<h1>Jobster</h1>
+		<h3>Welcome to Jobster, <?php echo "$sid"."<br>"; ?></h3>
+		<br>
 		<?php $_SESSION['sid']   = $sid; ?>
 		<form class="view1" method="post" action="viewProfile.php">
 			<input type="submit" value="View Your Profile">
@@ -30,43 +32,42 @@ $frtFrom = $row_trigger['freqFrom'];
 		<form class="view2" method="post" action="viewFriends.php">
 			<input type="submit" value="Talk To Your Friends">
 			<?php  
-				if($fmt == True){ echo "You have a new message:)";}
+				if($fmt == True){ echo "New message:)";}
 				$_SESSION['newMessageFrom'] = $fmtFrom;
 			?>
 		</form>
-		<br></br>
-		<form class="notify" method="post" action="friendNotifications.php">
+
+		<form class="notify1" method="post" action="friendNotifications.php">
 			<input type="submit" value="Friend Notifications">
 			<?php  
-				if($frt == True){ echo "You have a new Request:)";}
+				if($frt == True){ echo "New Request:)";}
 				$_SESSION['newRequestFrom'] = $frtFrom;
 			?>
 		</form>
-		<br>
 
-		<form class="notify" method="post" action="jobNotifications.php">
+		<form class="notify2" method="post" action="jobNotifications.php">
 			<input type="submit" value="Job Notifications">
 		</form>
 		<br></br>
 
 		<form class="search" method="post" action="companySearch.php">
-			<p>Search Company
+			<p class="normaltext">Company
 				<input id="companyname" name="companyname" required="required" type="text" >
-			<input type="submit" value="Search Company">
+			<input type="submit" value="Search">
 			</p>
 		</form>
 
 		<form class="search" method="post" action="friendSearch.php">
-			<p>Search Friends&nbsp;&nbsp;
+			<p class="normaltext">Friends&nbsp;&nbsp;
 				<input id="friendsname" name="friendsname" required="required" type="text">
-			<input type="submit" value="Search Friends">
+			<input type="submit" value="Search">
 			</p>
 		</form>
 
 		<form class="search" method="post" action="jobSearch.php">
-			<p>Search Job&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<p class="normaltext">Job&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input id="jobsname" name="jobname" required="required" type="text" >
-			<input type="submit" value="Search Job">
+			<input type="submit" value="Search">
 			</p>
 		</form>
 	    	<!-- <p class="jobsearch">Job Search 

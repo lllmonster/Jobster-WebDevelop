@@ -84,12 +84,15 @@ CREATE TABLE `FriendMessage` (
   `fid` VARCHAR(5) NOT NULL,
   `mdate` DATETIME NOT NULL,
   `message` BLOB NOT NULL,
+  `jidmes` VARCHAR(5),
   PRIMARY KEY (`sid`, `fid`,`mdate`),
   FOREIGN KEY (`sid`,`fid`) REFERENCES `Friends` (`sid`,`fid`));
 
-INSERT INTO `FriendMessage` VALUES ('S001', 'S002', '2018-03-12 12:00:00','Hope you find job before you graduate!');
-INSERT INTO `FriendMessage` VALUES ('S002', 'S001', '2018-03-12 12:10:00','Thank you, you too.');
-INSERT INTO `FriendMessage` VALUES ('S001', 'S003', '2018-04-17 18:00:00','Hello nice to meet you');
+INSERT INTO `FriendMessage` VALUES ('S001', 'S002', '2018-03-12 12:00:00','Hope you find job before you graduate!','');
+INSERT INTO `FriendMessage` VALUES ('S002', 'S001', '2018-03-12 12:10:00','Thank you, you too.','');
+INSERT INTO `FriendMessage` VALUES ('S001', 'S003', '2018-04-17 18:00:00','Hello nice to meet you','');
+INSERT INTO `FriendMessage` VALUES ('S002', 'S001', '2018-05-09 00:00:00','Job Message','J001');
+INSERT INTO `FriendMessage` VALUES ('S002', 'S001', '2018-05-10 00:00:00','Job Message','J005');
 
 CREATE TABLE `FriendTrigger` (
   `sid` VARCHAR(5) NOT NULL,
@@ -194,3 +197,16 @@ CREATE TABLE `JobNotifications` (
 INSERT INTO `JobNotifications` VALUES ('S001', 'J001', 'C02', '2018-04-14 00:00:00', 'Viewed');
 INSERT INTO `JobNotifications` VALUES ('S001', 'J002', 'C02', '2018-04-05 00:00:00', 'New');
 INSERT INTO `JobNotifications` VALUES ('S001', 'J003', 'C02', '2018-01-01 00:00:00', 'New');
+
+
+CREATE TABLE `Forward` (
+  `sid` VARCHAR(5) NOT NULL,
+  `fid` VARCHAR(5) NOT NULL,
+  `jid` VARCHAR(5) NOT NULL,
+  `ftime` DATETIME NOT NULL,
+  PRIMARY KEY (`sid`, `fid`,`jid`),
+  FOREIGN KEY (`sid`,`fid`) REFERENCES `Friends` (`sid`,`fid`),
+  FOREIGN KEY (`jid`) REFERENCES `JobInfo` (`jid`));
+
+INSERT INTO `Forward` VALUES ('S002', 'S001', 'J001', '2018-05-09 00:00:00');
+INSERT INTO `Forward` VALUES ('S002', 'S001', 'J002');

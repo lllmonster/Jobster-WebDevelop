@@ -1,5 +1,6 @@
 <?php
 include 'connectDB.php';
+
 session_start();
 if (isset($_SESSION['sid']) && isset($_SESSION['fid']) ) {
     $sid = $_SESSION['sid'];
@@ -15,6 +16,7 @@ $finalSid = $sid;
 $finalFid = $fid;
 
 $conn = connectDB();
+
 $sql = "Select * from FriendMessage 	
 		where (sid='$sid' and fid='$fid') or (sid='$fid' and fid='$sid')
 		order by mdate";
@@ -26,8 +28,19 @@ if ($result->num_rows > 0) { // output data of each row
     	$fid = $row['fid'];
         $message = $row["message"];
         $mdate = $row['mdate'];
-		echo "<br> ".$mdate."<br>";
-		echo "<br>".$sid." talk to ".$fid." : ".$message."<br>";
+        if ($row['jidmes'] != '') {
+            $jid = $row['jidmes'];
+            echo "<br> ".$mdate."<br>";
+            echo "<br>".$sid." talk to ".$fid." : ".
+                "<form method='post' action='test.php'>".
+                "<input type='hidden' name = 'job' value='$jid'>".
+                "<input class='joblink' type='submit' value='Send Job'>".
+                "</form>";
+        } else {
+            $jid = '';
+            echo "<br> ".$mdate."<br>";
+            echo "<br>".$sid." talk to ".$fid." : ".$message."<br>";
+        }
     }
 	echo "<br> New Message: <br>";
     // set the button
