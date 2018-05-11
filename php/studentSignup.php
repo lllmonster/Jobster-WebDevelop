@@ -2,11 +2,11 @@
 <html>
 <head>
 	<title>Student Sign Up</title>
-	<link rel="stylesheet" type="text/css" href="..\css\styleLogSign.css">
+	<link rel="stylesheet" type="text/css" href="..\css\style.css">
 </head>
 <body>
-    <div class="studentSignup">
-		<h1>Student Signup</h1>
+    <div class="container">
+		<h1>Student</h1>
 	    <form method="post" action="ssign.php">
 	    	<p>
 	    		Your name

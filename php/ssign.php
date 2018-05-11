@@ -10,7 +10,7 @@ $sql = "INSERT INTO `Student` VALUES('$sid','$sname','$spassword');";
 
 if ($conn->query($sql) === TRUE) {
     echo "Record updated successfully";
-    header("Location: ..\studentLogin.html");
+    header("Location: studentLogin.php");
 } else {
     echo "You need change a different username";
 }

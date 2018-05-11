@@ -21,7 +21,7 @@ if ($result->num_rows > 0) {
 		$user = $row['sid'];
 		$ifFriend = ifFriends($conn, $sid, $user);
 		if ($ifFriend) {
-			echo "<form>"."<br>"."Username: ".$user." Friend"."</form>";
+			echo "<form>"."<br>"."Username: ".$user." (Friend)"."</form>";
 		} else {
 	        // No friend relationship, need to add
 		    echo "<form method='post' action='friendRequest.php'>";
@@ -50,3 +50,14 @@ function ifFriends($conn, $sid, $user) {
 }
 
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Search</title>
+	<link rel="stylesheet" type="text/css" href="..\css\style.css">
+</head>
+<body>
+
+</body>
+</html>

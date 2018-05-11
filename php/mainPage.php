@@ -11,6 +11,8 @@ $fmtFrom = $row_trigger['fmesFrom'];
 $frt = $row_trigger['freqTrigger'];
 $frtFrom = $row_trigger['freqFrom'];
 // echo $fmt;
+$query1 = "select * from JobNotifications where sid='$sid' and ViewStstus='New' and jid not in (select jid from JobApply where sid = '$sid')";
+$result1 = mysqli_query($conn, $query1) or die('Query failed: ' . mysqli_error($conn));
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +34,7 @@ $frtFrom = $row_trigger['freqFrom'];
 		<form class="view2" method="post" action="viewFriends.php">
 			<input type="submit" value="Talk To Your Friends">
 			<?php  
-				if($fmt == True){ echo "New message:)";}
+				if($fmt == True){ echo "New :)";}
 				$_SESSION['newMessageFrom'] = $fmtFrom;
 			?>
 		</form>
@@ -40,17 +42,20 @@ $frtFrom = $row_trigger['freqFrom'];
 		<form class="notify1" method="post" action="friendNotifications.php">
 			<input type="submit" value="Friend Notifications">
 			<?php  
-				if($frt == True){ echo "New Request:)";}
+				if($frt == True){ echo "New :)";}
 				$_SESSION['newRequestFrom'] = $frtFrom;
 			?>
 		</form>
 
-		<form class="notify2" method="post" action="jobNotifications.php">
+		<form class="notify2" method="post" action="..\phpw\jobNotifications.php">
 			<input type="submit" value="Job Notifications">
+			<?php
+				if (mysqli_num_rows($result1) > 0) { echo "New jobs:)";}
+			?>
 		</form>
 		<br></br>
 
-		<form class="search" method="post" action="companySearch.php">
+		<form class="search" method="post" action="..\phpw\ViewCompany.php">
 			<p class="normaltext">Company
 				<input id="companyname" name="companyname" required="required" type="text" >
 			<input type="submit" value="Search">
@@ -64,7 +69,7 @@ $frtFrom = $row_trigger['freqFrom'];
 			</p>
 		</form>
 
-		<form class="search" method="post" action="jobSearch.php">
+		<form class="search" method="post" action="..\phpw\ViewJob.php">
 			<p class="normaltext">Job&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<input id="jobsname" name="jobname" required="required" type="text" >
 			<input type="submit" value="Search">

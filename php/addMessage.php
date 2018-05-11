@@ -13,7 +13,7 @@ $mdate = $now->format('Y-m-d H:i:s');    // MySQL datetime format
 $conn = connectDB();
 $mes =  mysqli_real_escape_string($conn, $message);
 $sql = "INSERT INTO `FriendMessage` 
-		VALUES ('$sid', '$fid', '$mdate','$mes');";
+		VALUES ('$sid', '$fid', '$mdate','$mes','');";
 
 if ($conn->query($sql) === TRUE) {
  //    echo "<form method='post' action='friendMessage.php'>";

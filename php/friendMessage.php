@@ -31,11 +31,11 @@ if ($result->num_rows > 0) { // output data of each row
         if ($row['jidmes'] != '') {
             $jid = $row['jidmes'];
             echo "<br> ".$mdate."<br>";
-            echo "<br>".$sid." talk to ".$fid." : ".
-                "<form method='post' action='test.php'>".
+            echo "<form method='post' action='..\phpw\ViewJob.php'>";
+            echo $sid." talk to ".$fid." : ".
                 "<input type='hidden' name = 'job' value='$jid'>".
-                "<input class='joblink' type='submit' value='Send Job'>".
-                "</form>";
+                "<input class='joblink' type='submit' value='Job Information'>"."</form>";
+            // echo "</form>";
         } else {
             $jid = '';
             echo "<br> ".$mdate."<br>";

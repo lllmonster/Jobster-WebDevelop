@@ -3,7 +3,7 @@ include 'connectDB.php';
 
 session_start();
 $sid = $_SESSION['sid'];
-echo "Hello, "."$sid"."<br>";
+echo "<br><h2>Hello, "."$sid"."</h2><br>";
 $newFid = NULL;
 if (isset($_SESSION['newMessageFrom'])) {
     $newFid = $_SESSION['newMessageFrom'];
@@ -25,7 +25,7 @@ if ($result->num_rows > 0) { // output data of each row
 	    echo "<form method='post' action='friendMessage.php'>";
 	    echo "<input type='hidden' name = 'sid' value='$sid'>";
 	    echo "<input type='hidden' name = 'fid' value='$fid'>";
-		echo "<p><input type='submit' value='Send Message'>";
+		echo "<p><input type='submit' value='Message'>";
 		echo "</form>";
     }
 } else {

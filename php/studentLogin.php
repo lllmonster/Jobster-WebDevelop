@@ -7,7 +7,7 @@
 </head>
 <body>
     <div class="container">
-		<h1>Student Login</h1>
+		<h1>Student</h1>
 	    <form method="post" action="slog.php">
 	    	<p>Your username
 	    		<input id="username" name="username" required="required" type="text" placeholder="username" />
@@ -22,6 +22,7 @@
 	    		<a href="studentSignup.php" class="tosignup">Join us</a>
 	    	</p>
 	    </form>
+	    <br></br><a href='..\index.html'>Return to Start Page</a>
 	</div>
 
 

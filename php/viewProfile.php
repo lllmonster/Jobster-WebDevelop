@@ -56,7 +56,7 @@ if ($result->num_rows > 0 ) {
 </head>
 <body>
     <div class="profile">
-		<h1>Your Profile</h1>
+		<h1>Profile</h1>
 		<p>User Name: <?php echo $sid ?></p>
 		<form method="post" action="editProfile.php">
 			<ul>
