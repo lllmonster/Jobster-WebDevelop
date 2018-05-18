@@ -58,6 +58,9 @@ if ($result->num_rows > 0 ) {
     <div class="profile">
 		<h1>Profile</h1>
 		<p>User Name: <?php echo $sid ?></p>
+		<a href="appliedJob.php" class="tosignup">Applied Job</a>&nbsp;&nbsp;
+		<a href="followedCompany.php" class="tosignup">Followed Company</a>
+
 		<form method="post" action="editProfile.php">
 			<ul>
 				<li>Your University: <?php echo $suniversity ?></li><br>
@@ -69,6 +72,7 @@ if ($result->num_rows > 0 ) {
 				<li>Your Resume: <a href="<?php echo($sresumeaddr) ?>">Your Resume</a></li><br>
 			</ul>
 			<input type="submit" value="Edit">
+
 			<p class="change_link">
 	    		<a href="mainPage.php" class="tosignup">Return to the main page</a>
 	    	</p>

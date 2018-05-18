@@ -2,25 +2,25 @@
 	include 'connectDB.php';
 	session_start();
 
-	if 	(isset($_POST['sid'])) {
-	$sid = $_POST['sid'];
-	}
 	if (isset($_SESSION['sid'])) {
 	$sid = $_SESSION['sid'];
 	}
-
-	if 	(isset($_POST['seecompanyjobs'])) {
-	$cid = $_POST['seecompanyjobs'];
+	if 	(isset($_POST['sid'])) {
+	$sid = $_POST['sid'];
 	}
+
 	if (isset($_SESSION['cid'])) {
 	$cid = $_SESSION['cid'];
 	}
-
- 	if (isset($_POST['keyword'])) {
-	$keyword = $_POST['keyword'];
+	if 	(isset($_POST['seecompanyjobs'])) {
+	$cid = $_POST['seecompanyjobs'];
 	}
+
 	if (isset($_SESSION['keyword'])) {
 	$keyword = $_SESSION['keyword'];
+	}
+ 	if (isset($_POST['keyword'])) {
+	$keyword = $_POST['keyword'];
 	}
 	$conn = connectDB();
 	echo "Hello, ".$sid;

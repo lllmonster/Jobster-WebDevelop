@@ -55,7 +55,9 @@
 			echo "<button type='submit' name='forward' formaction='Forward.php' value='".$row2["jid"]."'>Forward</button><br><br>";
 			}
 		}
-		else{echo "No notifications.";}
+		if (mysqli_num_rows($result1)<=0 && mysqli_num_rows($result2)<=0) {
+			echo "No notifications.";
+		}
 	    echo ""."<p class='change_link'><a href='MarkViewed.php' class='tosignup'>Return to the main page</a></p>";
 	?>
 	<table>

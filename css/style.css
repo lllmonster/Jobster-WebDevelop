@@ -104,6 +104,18 @@ a{
     /*background: green;*/
 }
 
+.friendSearch {
+    position: absolute;
+    margin: auto;
+    right: 25%;
+    left: 25%;
+    width: 500px;
+    height: 600px;
+    border-radius: 3px;
+    text-align: left;
+    /*background: green;*/
+}
+
 textarea,input[type=password],
 input[type=text],input[type=number] {
     font-family: cursive;
@@ -150,6 +162,10 @@ button[type=submit]:hover {
 .view1,.view2,
 .notify1,.notify2 {
     margin-left: 60px;
+    text-align: left;
+    display: inline-block;
+}
+.view10,.view20{
     text-align: left;
     display: inline-block;
 }

@@ -4,18 +4,18 @@
 	// $jid = $_POST['forward'];
 	// $sid = $_POST['sid'];
 	
-	if (isset($_POST['forward'])) {
-	$jid = $_POST['forward'];
-	}
 	if (isset($_SESSION['jid'])) {
 	$jid = $_SESSION['jid'];
 	}
-
-	if (isset($_POST['sid'])) {
-	$sid = $_POST['sid'];
+	if (isset($_POST['forward'])) {
+	$jid = $_POST['forward'];
 	}
+
 	if (isset($_SESSION['sid'])) {
 	$sid = $_SESSION['sid'];
+	}
+	if (isset($_POST['sid'])) {
+	$sid = $_POST['sid'];
 	}
 
 	$conn = connectDB();

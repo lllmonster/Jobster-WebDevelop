@@ -54,6 +54,7 @@ if ($result->num_rows > 0) { // output data of each row
     $_SESSION['sid'] = $finalSid;
     $_SESSION['fid'] = $finalFid;
 	echo "<p><input type='submit' value='Send'>";
+    echo "<br></br>"."<a href='viewFriends.php'>Return to the friend list</a>";
 	echo "</form>";
 } else {
     echo "Add more Friends!";

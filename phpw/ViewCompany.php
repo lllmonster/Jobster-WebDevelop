@@ -8,6 +8,9 @@
 	if (isset($_SESSION['sid'])) {
 		$sid = $_SESSION['sid'];
 	}
+	if (isset($_POST['cid'])) {
+	$keyword = $_POST['cid'];
+	}
 	if (isset($_SESSION['keyword'])) {
 		$keyword = $_SESSION['keyword'];
 	}
@@ -17,10 +20,10 @@
 
 	$conn = connectDB();
 	echo "Hello, ".$sid;
-	$query1 = "select * from Company natural join (select cid from Company where cname LIKE '%$keyword%' and cid not in (select cid from Follow where sid = '$sid')) as a";
+	$query1 = "select * from Company natural join (select cid from Company where (cname LIKE '%$keyword%' or cid='$keyword') and cid not in (select cid from Follow where sid = '$sid')) as a";
     $result1 = mysqli_query($conn, $query1) or die('Query failed: ' . mysqli_error($conn));
 
-    $query2 = "select * from Company natural join (select cid from Company where cname LIKE '%$keyword%' and cid in (select cid from Follow where sid='$sid')) as a";
+    $query2 = "select * from Company natural join (select cid from Company where (cname LIKE '%$keyword%' or cid='$keyword') and cid in (select cid from Follow where sid='$sid')) as a";
     $result2 = mysqli_query($conn, $query2) or die('Query failed: ' . mysqli_error($conn));
 ?>
 <form action="FollowCompany.php" method="POST">

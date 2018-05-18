@@ -4,32 +4,32 @@
 	// $jid = $_POST['forward'];
 	// $sid = $_POST['sid'];
 	
-	if (isset($_POST['forward'])) {
-	$jid = $_POST['forward'];
-	}
 	if (isset($_SESSION['jid'])) {
 	$jid = $_SESSION['jid'];
 	}
-
-	if (isset($_POST['sid'])) {
-	$sid = $_POST['sid'];
+	if (isset($_POST['forward'])) {
+	$jid = $_POST['forward'];
 	}
+
 	if (isset($_SESSION['sid'])) {
 	$sid = $_SESSION['sid'];
 	}
-
-	if (isset($_POST['cid'])) {
-	$cid = $_POST['cid'];
+	if (isset($_POST['sid'])) {
+	$sid = $_POST['sid'];
 	}
+
 	if (isset($_SESSION['cid'])) {
 	$cid = $_SESSION['cid'];
 	}
-
-	if (isset($_POST['keyword'])) {
-	$keyword = $_POST['keyword'];
+	if (isset($_POST['cid'])) {
+	$cid = $_POST['cid'];
 	}
+
 	if (isset($_SESSION['keyword'])) {
 	$keyword = $_SESSION['keyword'];
+	}
+	if (isset($_POST['keyword'])) {
+	$keyword = $_POST['keyword'];
 	}
 
 	$conn = connectDB();

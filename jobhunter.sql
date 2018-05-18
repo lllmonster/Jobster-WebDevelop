@@ -14,13 +14,13 @@ INSERT INTO `Student` VALUES('S007','Da Guai Liu','dgl007');
 
 CREATE TABLE `StudentInfo` (
   `sid` VARCHAR(5) NOT NULL,
-  `suniversity` VARCHAR(45) NOT NULL,
-  `sdegree` VARCHAR(45) NOT NULL,
-  `smajor` VARCHAR(45) NOT NULL,
-  `sgpa` DECIMAL(2,1) NOT NULL,
-  `sinfo` VARCHAR(255) NOT NULL,
-  `srestriction` ENUM('Y', 'N') NOT NULL,
-  `sresumeaddr` VARCHAR(255) NOT NULL,
+  `suniversity` VARCHAR(45),
+  `sdegree` VARCHAR(45),
+  `smajor` VARCHAR(45),
+  `sgpa` DECIMAL(2,1),
+  `sinfo` VARCHAR(255),
+  `srestriction` ENUM('Y', 'N'),
+  `sresumeaddr` VARCHAR(255),
   PRIMARY KEY (`sid`,`sresumeaddr`),
   FOREIGN KEY (`sid`) REFERENCES `Student` (`sid`));
 
@@ -199,14 +199,14 @@ INSERT INTO `JobNotifications` VALUES ('S001', 'J002', 'C02', '2018-04-05 00:00:
 INSERT INTO `JobNotifications` VALUES ('S001', 'J003', 'C02', '2018-01-01 00:00:00', 'New');
 
 
-CREATE TABLE `Forward` (
-  `sid` VARCHAR(5) NOT NULL,
-  `fid` VARCHAR(5) NOT NULL,
-  `jid` VARCHAR(5) NOT NULL,
-  `ftime` DATETIME NOT NULL,
-  PRIMARY KEY (`sid`, `fid`,`jid`),
-  FOREIGN KEY (`sid`,`fid`) REFERENCES `Friends` (`sid`,`fid`),
-  FOREIGN KEY (`jid`) REFERENCES `JobInfo` (`jid`));
+-- CREATE TABLE `Forward` (
+--   `sid` VARCHAR(5) NOT NULL,
+--   `fid` VARCHAR(5) NOT NULL,
+--   `jid` VARCHAR(5) NOT NULL,
+--   `ftime` DATETIME NOT NULL,
+--   PRIMARY KEY (`sid`, `fid`,`jid`),
+--   FOREIGN KEY (`sid`,`fid`) REFERENCES `Friends` (`sid`,`fid`),
+--   FOREIGN KEY (`jid`) REFERENCES `JobInfo` (`jid`));
 
-INSERT INTO `Forward` VALUES ('S002', 'S001', 'J001', '2018-05-09 00:00:00');
-INSERT INTO `Forward` VALUES ('S002', 'S001', 'J002');
+-- INSERT INTO `Forward` VALUES ('S002', 'S001', 'J001', '2018-05-09 00:00:00');
+-- INSERT INTO `Forward` VALUES ('S002', 'S001', 'J002');

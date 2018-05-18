@@ -21,8 +21,14 @@ if ($result->num_rows > 0) { // output data of each row
         if ($fid == $newFid) {
             echo " (New!!!) ";
         }
+        // profile button
+        echo "<form class='view1' method='post' action='friendProfile.php'>";
+        echo "<input type='hidden' name = 'sid' value='$sid'>";
+        echo "<input type='hidden' name = 'fid' value='$fid'>";
+        echo "<p><input type='submit' value='Profile'>";
+        echo "</form>";
         // set the button
-	    echo "<form method='post' action='friendMessage.php'>";
+	    echo "<form class='view2' method='post' action='friendMessage.php'>";
 	    echo "<input type='hidden' name = 'sid' value='$sid'>";
 	    echo "<input type='hidden' name = 'fid' value='$fid'>";
 		echo "<p><input type='submit' value='Message'>";
